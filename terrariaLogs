@@ -1,0 +1,8 @@
+/opt/terraria/data/logs/terraria.log {
+        rotate 7
+        daily
+        compress
+        delaycompress
+        missingok
+        notifempty
+        create 660 linuxuser linuxuser }
