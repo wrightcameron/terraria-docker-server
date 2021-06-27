@@ -12,9 +12,10 @@ _term() {
 cp -n ${TERRARIA_SERVER_DIR}/config.txt ${TERRARIA_DATA_DIR}
 cp -n ${TERRARIA_SERVER_DIR}/banlist.txt ${TERRARIA_DATA_DIR}
 mkdir -p ${TERRARIA_DATA_DIR}/worlds
-screen -DmS terraria bash -c "${TERRARIA_SERVER_DIR}/TerrariaServer.bin.x86_64 -config ${TERRARIA_DATA_DIR}/config.txt" &
+screen -DmS terraria -L -Logfile ${TERRARIA_DATA_DIR}/logs/terraria.log bash -c "${TERRARIA_SERVER_DIR}/TerrariaServer.bin.x86_64 -config ${TERRARIA_DATA_DIR}/config.txt" &
 pid=$!
 
 trap _term SIGTERM
 # Screen is running detached, stop docker container from exiting
+tail -f  ${TERRARIA_DATA_DIR}/logs/terraria.log &
 wait $pid
